@@ -18,22 +18,22 @@ if(!empty($_POST))
 	$password = strip_tags($_POST['password']);	
 	
 	if($username=="")	{
-		$error[] = "Geef een gebruikersnaam in";	
+		$error[] = "Fill in a username";	
 	}
     else if($fullname=="")	{
-		$error[] = "Geef uw volledige naam in";	
+		$error[] = "Fill in your fullname";	
 	}
 	else if($email=="")	{
-		$error[] = "Geef een emailadres in";	
+		$error[] = "Fill in your email";	
 	}
 	else if(!filter_var($email, FILTER_VALIDATE_EMAIL))	{
-	    $error[] = 'Geef een geldig emailadres in';
+	    $error[] = 'Email does not exist';
 	}
 	else if($password=="")	{
-		$error[] = "Wachtwoord invullen";
+		$error[] = "Fill in password";
 	}
 	else if(strlen($password) < 6){
-		$error[] = "Wachtwoord moet minstens 6 karakters bevatten";	
+		$error[] = "Password needs to have atleast 6 characters";	
 	}
 	else
 	{
@@ -44,10 +44,10 @@ if(!empty($_POST))
 			$row=$statement->fetch(PDO::FETCH_ASSOC);
 				
 			if($row['username']==$username) {
-				$error[] = "Gebruikersnaam is al in gebruik";
+				$error[] = "Username is taken";
 			}
 			else if($row['email']==$email) {
-				$error[] = "Emailadres is al in gebruik";
+				$error[] = "Email is already in use";
 			}
 			else
 			{
@@ -113,25 +113,25 @@ if(!empty($_POST))
 			}
 			?>
             <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Gebruikersnaam" value="<?php if(isset($error)){echo $username;}?>" />
+            <input type="text" class="form-control" name="username" placeholder="Username" value="<?php if(isset($error)){echo $username;}?>" />
             </div>
             <div class="form-group">
-            <input type="text" class="form-control" name="fullname" placeholder="Volledige naam" value="<?php if(isset($error)){echo $fullname;}?>" />
+            <input type="text" class="form-control" name="fullname" placeholder="Fullname" value="<?php if(isset($error)){echo $fullname;}?>" />
             </div>
             <div class="form-group">
-            <input type="text" class="form-control" name="email" placeholder="Emailadres" value="<?php if(isset($error)){echo $email;}?>" />
+            <input type="text" class="form-control" name="email" placeholder="Email" value="<?php if(isset($error)){echo $email;}?>" />
             </div>
             <div class="form-group">
-            	<input type="password" class="form-control" name="password" placeholder="Wachtwoord" />
+            	<input type="password" class="form-control" name="password" placeholder="Password" />
             </div>
             <div class="clearfix"></div><hr />
             <div class="form-group">
             	<button type="submit" class="btn btn-primary" name="btn-signup">
-                	<i class="glyphicon glyphicon-open-file"></i>&nbsp;Registreren
+                	<i class="glyphicon glyphicon-open-file"></i>&nbsp;Signup
                 </button>
             </div>
             <br />
-            <label>Heeft u al een account? <a href="index.php">Aanmelden</a></label>
+            <label>Already have an account? <a href="index.php">Login</a></label>
         </form>
        </div>
 </div>

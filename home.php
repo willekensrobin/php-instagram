@@ -57,10 +57,10 @@
             
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-			  <span class="glyphicon glyphicon-user"></span>&nbsp;Hallo <?php echo $userRow['fullname']; ?>&nbsp;<span class="caret"></span></a>
+			  <span class="glyphicon glyphicon-user"></span>&nbsp;Hello <?php echo $userRow['fullname']; ?>&nbsp;<span class="caret"></span></a>
               <ul class="dropdown">
-                <li><a href="profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Profiel</a></li>
-                <li><a href="logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Uitloggen</a></li>
+                <li><a href="edit-profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Edit profile</a></li>
+                <li><a href="logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
               </ul>
             </li>
           </ul>
@@ -76,15 +76,15 @@
 	
     <div class="container">
     
-    	<label class="h5">Welkom : <?php print($userRow['fullname']); ?></label>
+    	<label class="h5">Welcome : <?php print($userRow['fullname']); ?></label>
         <hr />
         
         <h1>
         <a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a> &nbsp; 
-        <a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profiel</a></h1>
+        <a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></h1>
        	<hr />
         
-        <p class="h4">User Home Pagina</p> 
+        <p class="h4">Home page</p> 
 
     </div>
 

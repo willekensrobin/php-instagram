@@ -23,7 +23,7 @@ if(!empty($_POST))
 	}
 	else
 	{
-		$error = "Email en wachtwoord zijn ongeldig";
+		$error = "Email or password incorrect";
 	}	
 }
 ?>
@@ -53,7 +53,7 @@ if(!empty($_POST))
         
        <form class="form-signin" method="post" id="login-form">
       
-        <h2 class="form-signin-heading">Aanmelden</h2><hr />
+        <h2 class="form-signin-heading">Login</h2><hr />
         
         <div id="error">
         <?php
@@ -69,23 +69,23 @@ if(!empty($_POST))
         </div>
         
         <div class="form-group">
-        <input type="text" class="form-control" name="username" placeholder="Gebruikersnaam of Email" required />
+        <input type="text" class="form-control" name="username" placeholder="Username or email" required />
         <span id="check-e"></span>
         </div>
         
         <div class="form-group">
-        <input type="password" class="form-control" name="password" placeholder="Wachtwoord" />
+        <input type="password" class="form-control" name="password" placeholder="Password" />
         </div>
        
      	<hr />
         
         <div class="form-group">
             <button type="submit" name="btn-login" class="btn btn-default">
-                	<i class="glyphicon glyphicon-log-in"></i> &nbsp; Aanmelden
+                	<i class="glyphicon glyphicon-log-in"></i> &nbsp; Login
             </button>
         </div>  
       	<br />
-            <label>Nog geen account? <a href="signup.php">Registreer</a></label>
+            <label>Don't have an account yet? <a href="signup.php">Signup</a></label>
       </form>
 
     </div>
