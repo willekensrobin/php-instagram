@@ -90,7 +90,7 @@ if(!empty($_POST))
 <div class="container">
     	
         <form method="post" class="form-signin">
-            <h2 class="form-signin-heading">Sign up.</h2><hr />
+            <h2 class="form-signin-heading">Sign up</h2><hr />
             <?php
 			if(isset($error))
 			{

@@ -4,15 +4,52 @@
 	
 	require_once("classes/user.class.php");
 
-	$auth_user = new User();
+	$update_user = new User();
 	
 	
 	$user_id = $_SESSION['session'];
 	
-	$statement = $auth_user->runQuery("SELECT * FROM db_users WHERE id=:id");
+	$statement = $update_user->runQuery("SELECT * FROM db_users WHERE id=:id");
 	$statement->execute(array(":id"=>$user_id));
 	
 	$userRow=$statement->fetch(PDO::FETCH_ASSOC);
+
+if(!empty($_POST))
+{
+	$username = strip_tags($_POST['username']);
+    $fullname = strip_tags($_POST['fullname']);
+	$email = strip_tags($_POST['email']);	
+
+	if(!filter_var($email, FILTER_VALIDATE_EMAIL))	{
+	    $error[] = 'Email does not exist';
+	}
+	else
+	{
+		try
+		{
+			$statement = $update_user->runQuery("SELECT username, email FROM db_users WHERE username=:username OR email=:email");
+			$statement->execute(array(':username'=>$username, ':email'=>$email));
+			$row=$statement->fetch(PDO::FETCH_ASSOC);
+				
+			if($row['username']==$username) {
+				$error[] = "Username is taken";
+			}
+			else if($row['email']==$email) {
+				$error[] = "Email is already in use";
+			}
+			else
+			{
+				$update_user->updateInfo();
+				$update_user->redirect('profile.php?joined');
+				
+			}
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}
+	}	
+}
 
 ?>
 <!DOCTYPE html>
@@ -83,7 +120,50 @@
         <a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></h1>
        	<hr />
         
-        <p class="h4">Edit profile</p> 
+        <form method="post" class="form-signin">
+            <h2 class="form-signin-heading">Edit profile</h2><hr />
+            <?php
+			if(isset($error))
+			{
+			 	foreach($error as $error)
+			 	{
+					 ?>
+                     <div class="alert alert-danger">
+                        <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
+                     </div>
+                     <?php
+				}
+			}
+			else if(isset($_GET['joined']))
+			{
+				 ?>
+                 <div class="alert alert-info">
+                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Profile updated 
+                 </div>
+                 <?php
+			}
+			?>
+            <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Username" value="<?php if(isset($error)){echo $username;}?>" />
+            </div>
+            
+            <div class="form-group">
+            <input type="text" class="form-control" name="fullname" placeholder="Fullname" value="<?php if(isset($error)){echo $fullname;}?>" />
+            </div>
+            
+            <div class="form-group">
+            <input type="text" class="form-control" name="email" placeholder="Email" value="<?php if(isset($error)){echo $email;}?>" />
+            </div>
+            
+            <div class="clearfix"></div><hr />
+            <div class="form-group">
+            
+            	<button type="submit" class="btn btn-primary" name="btn-signup">
+                	<i class="glyphicon glyphicon-open-file"></i>&nbsp;Update
+                </button>
+                
+            </div>
+        </form>
 
     </div>
 

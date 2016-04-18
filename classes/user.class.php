@@ -90,5 +90,33 @@ class User
 		unset($_SESSION['session']);
 		return true;
 	}
+    
+    public function updateInfo()
+    {
+        try
+		{	
+            $userRow=$statement->fetch(PDO::FETCH_ASSOC);
+            $_SESSION['session'] = $userRow['id'];
+            
+			$statement = $this->conn->prepare("UPDATE TABLE db_users SET username=:username, fullname=:fullname, email=:email WHERE id=". $userRow .";");
+            									  
+			$statement->bindparam(":username", $username);
+            $statement->bindparam(":fullname", $fullname);
+			$statement->bindparam(":email", $email);										  
+				
+			$statement->execute();	
+			
+			return $statement;	
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}		
+    }
+    
+    public function updatePassword()
+    {
+        
+    }
 }
 ?>
