@@ -91,15 +91,12 @@ class User
 		return true;
 	}
     
-    public function updateInfo()
+    public function updateInfo($username, $fullname, $email)
     {
         try
 		{	
-            $userRow=$statement->fetch(PDO::FETCH_ASSOC);
-            $_SESSION['session'] = $userRow['id'];
-            
-			$statement = $this->conn->prepare("UPDATE TABLE db_users SET username=:username, fullname=:fullname, email=:email WHERE id=". $userRow .";");
-            									  
+            $userRow = $_SESSION['session'];
+            $statement = $this->conn->prepare("UPDATE db_users SET username=:username, fullname=:fullname, email=:email WHERE id=". $userRow .";");
 			$statement->bindparam(":username", $username);
             $statement->bindparam(":fullname", $fullname);
 			$statement->bindparam(":email", $email);										  

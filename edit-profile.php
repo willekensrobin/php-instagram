@@ -27,21 +27,18 @@ if(!empty($_POST))
 	{
 		try
 		{
-			$statement = $update_user->runQuery("SELECT username, email FROM db_users WHERE username=:username OR email=:email");
-			$statement->execute(array(':username'=>$username, ':email'=>$email));
+			$statement = $update_user->runQuery("SELECT username, email FROM db_users WHERE id=:id");
+			$statement->execute(array(":id"=>$user_id));
 			$row=$statement->fetch(PDO::FETCH_ASSOC);
+            
 				
-			if($row['username']==$username) {
-				$error[] = "Username is taken";
-			}
-			else if($row['email']==$email) {
-				$error[] = "Email is already in use";
-			}
+			if($row['username']==""){
+                $error[] = "shit's empty yo";
+            }
 			else
 			{
-				$update_user->updateInfo();
+				$update_user->updateInfo($username, $fullname, $email);
 				$update_user->redirect('profile.php?joined');
-				
 			}
 		}
 		catch(PDOException $e)
@@ -144,15 +141,18 @@ if(!empty($_POST))
 			}
 			?>
             <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username" value="<?php if(isset($error)){echo $username;}?>" />
+                <input type="file" class="form-control" name="avatar" id="avatar">
+            </div>
+            <div class="form-group">
+            <input type="text" class="form-control" name="username" placeholder="Username" id="username" value="<?php echo $userRow["username"];?>" />
             </div>
             
             <div class="form-group">
-            <input type="text" class="form-control" name="fullname" placeholder="Fullname" value="<?php if(isset($error)){echo $fullname;}?>" />
+            <input type="text" class="form-control" name="fullname" placeholder="Fullname" id="fullname" value="<?php echo $userRow["fullname"];?>" />
             </div>
             
             <div class="form-group">
-            <input type="text" class="form-control" name="email" placeholder="Email" value="<?php if(isset($error)){echo $email;}?>" />
+            <input type="text" class="form-control" name="email" placeholder="Email" id="email" value="<?php echo $userRow["email"];?>" />
             </div>
             
             <div class="clearfix"></div><hr />
