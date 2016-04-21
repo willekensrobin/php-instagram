@@ -46,6 +46,7 @@ if(!empty($_POST))
     <![endif]-->
 </head>
 
+<body>
 <div class="signin-form">
 
 	<div class="container">
