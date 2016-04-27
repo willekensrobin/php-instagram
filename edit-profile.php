@@ -69,9 +69,12 @@ if(!empty($_POST))
 </head>
 
 <body>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-1.12.3.min.js"></script>
 
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
+       
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
             <span class="sr-only">Toggle navigation</span>
@@ -79,27 +82,30 @@ if(!empty($_POST))
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-
-        </div>
+          </div>
+          
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Dummy 1</a></li>
-            <li><a href="#">Dummy 2</a></li>
-            <li><a href="#">Dummy 3</a></li>
+            <li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a> &nbsp;</li>
+            <li><input type="text" placeholder="Search"/></li>
+            <li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a> &nbsp;</li>
+            <li><a href="post.php"><span class="glyphicon glyphicon-camera"></span> Post</a> &nbsp;</li>
           </ul>
+          
           <ul class="nav navbar-nav navbar-right">
-            
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 			  <span class="glyphicon glyphicon-user"></span>&nbsp;Hello <?php echo $userRow['fullname']; ?>&nbsp;<span class="caret"></span></a>
               <ul class="dropdown">
+                <li><a href="edit-profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Edit profile</a></li>
                 <li><a href="logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
               </ul>
             </li>
           </ul>
+          
         </div><!--/.nav-collapse -->
       </div>
-    </nav>
+</nav>
 
 
     <div class="clearfix"></div>
@@ -108,17 +114,9 @@ if(!empty($_POST))
     <div class="container-fluid" style="margin-top:80px;">
 	
     <div class="container">
-    
-    	<label class="h5">Welcome : <?php print($userRow['fullname']); ?></label>
-        <hr />
-        
-        <h1>
-        <a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a> &nbsp; 
-        <a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a></h1>
-       	<hr />
         
         <form method="post" class="form-signin">
-            <h2 class="form-signin-heading">Edit profile</h2><hr />
+            <h2 class="form-signin-heading">Edit profile</h2> <hr />
             <?php
 			if(isset($error))
 			{
