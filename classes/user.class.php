@@ -91,7 +91,7 @@ class User
 		return true;
 	}
     
-    public function updateInfo($username, $fullname, $email)
+    public function updateInfo($username, $fullname, $email)    
     {
         try
 		{	

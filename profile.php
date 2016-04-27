@@ -74,7 +74,7 @@
 	
     <div class="container">
     
-    	<label class="h5">Welcome : <?php print($userRow['fullname']); ?></label>
+    	<label class="h5">Welcome : <?php  print($userRow['fullname']); ?></label>
         <hr />
         
         <h1>
