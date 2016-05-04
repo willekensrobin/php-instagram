@@ -13,7 +13,7 @@
 	if(isset($_GET['logout']) && $_GET['logout'] == "true")
 	{
 		$user_logout->logout();
-		$user_logout->redirect('index.php');
+		$user_logout->redirect('login.php');
 	}
 
 ?>

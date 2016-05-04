@@ -33,7 +33,7 @@ if(!empty($_POST))
             
 				
 			if($row['username']==""){
-                $error[] = "shit's empty yo";
+                $error[] = "Username is empty";
             }
 			else
 			{
@@ -98,7 +98,7 @@ if(!empty($_POST))
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 			  <span class="glyphicon glyphicon-user"></span>&nbsp;Hello <?php echo $userRow['fullname']; ?>&nbsp;<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="edit-profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Edit profile</a></li>
+                <li><a href="edit-profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Account</a></li>
                 <li><a href="logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
               </ul>
             </li>
@@ -117,7 +117,7 @@ if(!empty($_POST))
     <div class="container">
         
         <form method="post" class="form-signin">
-            <h2 class="form-signin-heading">Edit profile</h2> <hr />
+            <h2 class="form-signin-heading">Account</h2> <hr />
             <?php
 			if(isset($error))
 			{
@@ -134,7 +134,7 @@ if(!empty($_POST))
 			{
 				 ?>
                  <div class="alert alert-info">
-                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Profile updated 
+                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Account updated 
                  </div>
                  <?php
 			}

@@ -63,7 +63,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 			  <span class="glyphicon glyphicon-user"></span>&nbsp;Hello <?php echo $userRow['fullname']; ?>&nbsp;<span class="caret"></span></a>
               <ul class="dropdown-menu">
-                <li><a href="edit-profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Edit profile</a></li>
+                <li><a href="account.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Account</a></li>
                 <li><a href="logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
               </ul>
             </li>

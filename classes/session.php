@@ -11,5 +11,5 @@
 	if(!$session->loggedin())
 	{
 		// session no set redirects to login page
-		$session->redirect('index.php');
+		$session->redirect('home.php');
 	}

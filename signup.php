@@ -131,7 +131,7 @@ if(!empty($_POST))
                 </button>
             </div>
             <br />
-            <label>Already have an account? <a href="index.php">Login</a></label>
+            <label>Already have an account? <a href="login.php">Login</a></label>
         </form>
        </div>
 </div>
