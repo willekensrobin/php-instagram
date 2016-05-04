@@ -45,8 +45,6 @@ if(!empty($_POST))
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
-<script src="js/bootstrap.min.js"></script>
-<script src="js/jquery-1.12.3.min.js"></script>
 
 <body>
 <div class="signin-form">
