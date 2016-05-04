@@ -15,7 +15,9 @@ if(!empty($_POST))
 	$username = strip_tags($_POST['username']);
     $fullname = strip_tags($_POST['fullname']);
 	$email = strip_tags($_POST['email']);
-	$password = strip_tags($_POST['password']);	
+    $checkemail = strip_tags($_POST['repeat_email']);
+	$password = strip_tags($_POST['password']);
+    $checkpass = strip_tags($_POST['repeat_pass']);
 	
 	if($username=="")	{
 		$error[] = "Fill in a username";	
@@ -26,11 +28,17 @@ if(!empty($_POST))
 	else if($email=="")	{
 		$error[] = "Fill in your email";	
 	}
+    else if($email!=$checkemail)	{
+		$error[] = "Email does not match";	
+	}
 	else if(!filter_var($email, FILTER_VALIDATE_EMAIL))	{
 	    $error[] = 'Email does not exist';
 	}
 	else if($password=="")	{
 		$error[] = "Fill in password";
+	}
+    else if($password!=$checkpass)	{
+		$error[] = "Password does not match";
 	}
 	else if(strlen($password) < 6){
 		$error[] = "Password needs to have atleast 6 characters";	
@@ -107,7 +115,7 @@ if(!empty($_POST))
 			{
 				 ?>
                  <div class="alert alert-info">
-                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; U bent gerigstreerd <a href='index.php'>Log</a> hier in
+                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; You've been successfully registered <a href='login.php'>Login here</a>
                  </div>
                  <?php
 			}
@@ -122,7 +130,13 @@ if(!empty($_POST))
             <input type="text" class="form-control" name="email" placeholder="Email" value="<?php if(isset($error)){echo $email;}?>" />
             </div>
             <div class="form-group">
+            <input type="text" class="form-control" name="repeat_email" placeholder="Re-type email"/>
+            </div>
+            <div class="form-group">
             	<input type="password" class="form-control" name="password" placeholder="Password" />
+            </div>
+            <div class="form-group">
+            	<input type="password" class="form-control" name="repeat_pass" placeholder="Re-type password" />
             </div>
             <div class="clearfix"></div><hr />
             <div class="form-group">
