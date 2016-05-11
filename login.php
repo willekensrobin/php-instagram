@@ -67,14 +67,16 @@ if(!empty($_POST))
                 	<i class="glyphicon glyphicon-log-in"></i> &nbsp; Login
             </button>
         </div> 
-        <div class="form-group">
-            <button type="" name="btn-login" class="btn btn-primary">
-<i class="fa fa-facebook"></i> <a href="facebook-login/">Login with Facebook</a>
-            </button>
-        </div> 
+       
       	<br />
+           
             <label>Don't have an account yet? <a href="signup.php">Signup</a></label>
       </form>
+       <div class="form-group">
+            <button type="" name="btn-login" class="btn btn-primary">
+<i class="fa fa-facebook"></i> <a style="color:#fff;" href="fbconfig.php">Login with Facebook</a>
+            </button>
+        </div> 
 
     </div>
     

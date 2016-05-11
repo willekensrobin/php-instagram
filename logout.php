@@ -1,6 +1,6 @@
 <?php
-
-	require_once('classes/session.php');
+	
+session_start();
 
 	require_once('classes/user.class.php');
 
@@ -13,7 +13,7 @@
 	if(isset($_GET['logout']) && $_GET['logout'] == "true")
 	{
 		$user_logout->logout();
-		$user_logout->redirect('login.php');
+		$user_logout->redirect('home.php');
 	}
 
 ?>
