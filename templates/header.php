@@ -72,7 +72,7 @@ else{
                             <a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i>
 </a>
                         </li>
-                        <li>
+                         <li>
                             <a href="post.php"><i class="fa fa-upload" aria-hidden="true"></i>
 </a>
                         </li>

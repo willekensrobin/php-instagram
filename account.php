@@ -62,6 +62,7 @@ if(!empty($_POST))
             <a class="btn btn-custom" href="account.php">Account</a> 
             <a class="btn btn-custom" href="password.php">Password</a>
             
+            
             <hr />
             <?php
 			if(isset($error))
