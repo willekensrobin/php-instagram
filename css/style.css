@@ -1,0 +1,26 @@
+@import url(https://fonts.googleapis.com/css?family=Oswald:400,700,300);
+.navbar-brand{
+    font-family: 'Oswald';
+    color: #fff;  
+    margin-top: 0px;
+}
+.navbar-inverse .navbar-brand{
+    color: #fff;
+}
+.navbar-default .navbar-brand{
+    color: #fff;
+}
+.banner-img {
+    background-image: url("https://snap-photos.s3.amazonaws.com/img-thumbs/960w/KFDVJUL4M1.jpg");
+    margin-top: -25px;
+    height: 800px;
+    background-size: cover;
+}
+.banner-img h1{
+    color: #fff;
+    background-color: #000;
+    font-family: 'Oswald';
+    text-align: center;
+    margin-top: 300px;
+    
+}
