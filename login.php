@@ -8,7 +8,7 @@ $login = new User();
 
 if($login->loggedin()!="")
 {
-	$login->redirect('dashboard.php');
+	$login->redirect('home.php');
 }
 
 if(!empty($_POST))
@@ -19,7 +19,9 @@ if(!empty($_POST))
 		
 	if($login->login($username,$email,$password))
 	{
-		$login->redirect('dashboard.php');
+        $_SESSION['login'] = 1;
+        $_SESSION['loggedin_user'] = $username;
+		$login->redirect('home.php');
 	}
 	else
 	{

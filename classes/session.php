@@ -1,15 +1,19 @@
 <?php
+	require_once('classes/user.class.php');
+
 
 	session_start();
+    $session = new User();
+
+if($session->loggedin()!=""){
+
+	$conn = new mysqli("localhost", "root", "", "instagram");
+	$query = "SELECT * FROM db_users WHERE username = '".$_SESSION['loggedin_user']."';";
+	$result = $conn->query($query);
 	
-	require_once('classes/user.class.php');
-	$session = new User();
-	
-	// if user session is not active(not loggedin) this page will help 'home.php and profile.php' to redirect to login page
-	// put this file within secured pages that users (users can't access without login)
-	
-	if(!$session->loggedin())
-	{
-		// session no set redirects to login page
-		$session->redirect('dashboard.php');
-	}
+	$object = $result->fetch_object();
+	$_SESSION['loggedin_userid'] = $object->id;
+}
+else{
+    header('home.php');
+};
