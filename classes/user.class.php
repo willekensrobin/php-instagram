@@ -111,15 +111,15 @@ class User
 		}		
     }
     
-    public function updatePass($newpassword)
+    public function updatePass($newpass)
     {
         try
 		{	
-            $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+            $newpass = password_hash($newpass, PASSWORD_DEFAULT);
             
             $userRow = $_SESSION['session'];
             $statement = $this->conn->prepare("UPDATE db_users SET password=:password WHERE id=". $userRow .";");
-			$statement->bindparam(":password", $newpassword);									  
+			$statement->bindparam(":password", $newpass);
 				
 			$statement->execute();	
 			

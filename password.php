@@ -26,7 +26,7 @@ if(!empty($_POST))
 		$error[] = "Fill in old password";
 	}
 	else if($newpass=="")	{
-		$error[] = "Fill in  newpassword";
+		$error[] = "Fill in  new password";
 	}
     else if($newpass!=$checkpass)	{
 		$error[] = "New password does not match";
@@ -44,15 +44,15 @@ if(!empty($_POST))
 			$statement = $update_pass->runQuery("SELECT password FROM db_users WHERE id=:id");
 			$statement->execute(array(":id"=>$user_id));
 			$row = $statement->fetch(PDO::FETCH_ASSOC);
-				
-			if(password_verify($oldpass, $row['password'])) {
-				$error[] = "Password is incorrect";
-			}
-			else
+
+            if(password_verify($oldpass, $row['password']))
+            {
+                $update_pass->updatePass($newpass);
+                $update_pass->redirect('password.php?joined');
+            }
+            else
 			{
-				if($update_pass->updatePass($newpass)){	
-					$update_pass->redirect('password.php?joined');
-				}
+                $error[] = "Password is incorrect";
 			}
 		}
 		catch(PDOException $e)
