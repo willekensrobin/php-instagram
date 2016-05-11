@@ -6,13 +6,12 @@
 
 	$auth_user = new User();
 	
-	
 	$user_id = $_SESSION['session'];
 	
 	$statement = $auth_user->runQuery("SELECT * FROM db_users WHERE id=:id");
 	$statement->execute(array(":id"=>$user_id));
 	
-	$userRow=$statement->fetch(PDO::FETCH_ASSOC);
+	$userRow=$statement->fetch(PDO::FETCH_ASSOC);    
 
 ?>
 <!DOCTYPE html>
@@ -54,7 +53,7 @@
           
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a> &nbsp;</li>
+            <li><a href="dashboard.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a> &nbsp;</li>
             <li><input type="text" placeholder="Search"/></li>
             <li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a> &nbsp;</li>
             <li><a href="post.php"><span class="glyphicon glyphicon-camera"></span> Post</a> &nbsp;</li>
@@ -85,6 +84,7 @@
             <hr />
 
             <p class="h4">Home page</p> 
+            
 
         </div>
 

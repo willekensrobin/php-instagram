@@ -4,41 +4,53 @@
 	
 	require_once("classes/user.class.php");
 
-	$update_user = new User();
+	$update_pass = new User();
 	
 	
 	$user_id = $_SESSION['session'];
 	
-	$statement = $update_user->runQuery("SELECT * FROM db_users WHERE id=:id");
+	$statement = $update_pass->runQuery("SELECT * FROM db_users WHERE id=:id");
 	$statement->execute(array(":id"=>$user_id));
 	
 	$userRow=$statement->fetch(PDO::FETCH_ASSOC);
 
 if(!empty($_POST))
 {
-	$username = strip_tags($_POST['username']);
-    $fullname = strip_tags($_POST['fullname']);
-	$email = strip_tags($_POST['email']);	
-
-	if(!filter_var($email, FILTER_VALIDATE_EMAIL))	{
-	    $error[] = 'Email does not exist';
+	$oldpass = strip_tags($_POST['oldpass']);
+	$newpass = strip_tags($_POST['newpass']);
+    $checkpass = strip_tags($_POST['checkpass']);
+	
+    if($oldpass=="")	{
+		$error[] = "Fill in old password";
+	}
+	else if($newpass=="")	{
+		$error[] = "Fill in  newpassword";
+	}
+    else if($newpass!=$checkpass)	{
+		$error[] = "New password does not match";
+	}
+    else if($oldpass == $newpass)	{
+		$error[] = "New password is the same as current password";
+	}
+	else if(strlen($newpass) < 6){
+		$error[] = "New password needs to have atleast 6 characters";	
 	}
 	else
 	{
 		try
 		{
-			$statement = $update_user->runQuery("SELECT username, email FROM db_users WHERE id=:id");
+			$statement = $update_pass->runQuery("SELECT password FROM db_users WHERE id=:id");
 			$statement->execute(array(":id"=>$user_id));
-			$row=$statement->fetch(PDO::FETCH_ASSOC);
-            
+			$row = $statement->fetch(PDO::FETCH_ASSOC);
 				
-			if($row['username']==""){
-                $error[] = "Username is empty";
-            }
+			if(password_verify($oldpass, $row['password'])) {
+				$error[] = "Password is incorrect";
+			}
 			else
 			{
-				$update_user->updateInfo($username, $fullname, $email);
-				$update_user->redirect('account.php?joined');
+				if($update_pass->updatePass($newpass)){	
+					$update_pass->redirect('password.php?joined');
+				}
 			}
 		}
 		catch(PDOException $e)
@@ -137,24 +149,21 @@ if(!empty($_POST))
 			{
 				 ?>
                  <div class="alert alert-info">
-                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Account updated 
+                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Password updated 
                  </div>
                  <?php
 			}
 			?>
             <div class="form-group">
-                <input type="file" class="form-control" name="avatar" id="avatar" placeholder="Picture">
-            </div>
-            <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username" id="username" value="<?php echo $userRow["username"];?>" />
+            <input type="password" class="form-control" name="oldpass" placeholder="Old password" id="oldpass"/>
             </div>
             
             <div class="form-group">
-            <input type="text" class="form-control" name="fullname" placeholder="Fullname" id="fullname" value="<?php echo $userRow["fullname"];?>" />
+            <input type="password" class="form-control" name="newpass" placeholder="New password" id="fullname" />
             </div>
             
             <div class="form-group">
-            <input type="text" class="form-control" name="email" placeholder="Email" id="email" value="<?php echo $userRow["email"];?>" />
+            <input type="password" class="form-control" name="checkpass" placeholder="Re-type new password" id="checkpass"  />
             </div>
             
             <div class="clearfix"></div><hr />

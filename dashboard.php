@@ -4,40 +4,10 @@ require_once("classes/session.php");
 
 require_once("classes/post.class.php");
 
-$post = new Post();
+$p = new Post();
 
-if(!empty($_POST))
-{
-    $picture = $_POST['picture'];
-    $comment = strip_tags($_POST['comment']);
-    
-    if($picture=="")	
-    {
-		$error[] = "No picture";	
-	}
-    else if($comment=="")	
-    {
-		$error[] = "Add a description";	
-	}
-    else
-    {
-        try
-		{
-            if($post->savePost($picture, $comment))
-            {	
-				$post->redirect('dashboard.php?joined');
-            }
-			
-		}
-		catch(PDOException $e)
-		{
-			echo $e->getMessage();
-		}
-    }
-}
+$posts = $p->getPosts();
 
-
-    
 ?><!DOCTYPE html>
 <html lang="">
 <head>
@@ -45,12 +15,10 @@ if(!empty($_POST))
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Post picture</title>
+    <title>Instagram</title>
     <link rel="shortcut icon" href="">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
     <style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
 
     <!--[if IE]>
@@ -60,8 +28,8 @@ if(!empty($_POST))
 </head>
 
 <body>
-   
-<nav class="navbar navbar-default navbar-fixed-top">
+    
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
        
         <div class="navbar-header">
@@ -96,56 +64,46 @@ if(!empty($_POST))
       </div>
 </nav>
 
-
     <div class="clearfix"></div>
-    	  
+    	 
     <div class="container-fluid" style="margin-top:80px;">
 	
-    <div class="container">
-        
-        <form method="post" class="form-signin">
-            <h2 class="form-signin-heading">Post picture</h2> <hr />
-            <?php
-			if(isset($error))
-			{
-			 	foreach($error as $error)
-			 	{
-					 ?>
-                     <div class="alert alert-danger">
-                        <i class="glyphicon glyphicon-warning-sign"></i> &nbsp; <?php echo $error; ?>
-                     </div>
-                     <?php
-				}
-			}
-			else if(isset($_GET['joined']))
-			{
-				 ?>
-                 <div class="alert alert-info">
-                      <i class="glyphicon glyphicon-log-in"></i> &nbsp; Success 
-                 </div>
-                 <?php
-			}
-			?>
-            <div class="form-group">
-                <input type="file" class="form-control" name="picture" id="picture">
-            </div>
-            <div class="form-group">
-            <input type="text" class="form-control" name="comment" placeholder="Write description" id="comment" />
-            </div>
+        <div class="container">
+
+            <p class="h4">Dashboard</p>
             
-            <div class="clearfix"></div><hr />
-            <div class="form-group">
-            
-            	<button type="submit" class="btn btn-primary" name="btn-signup">
-                	<i class="glyphicon glyphicon-open-file"></i>&nbsp;Post
-                </button>
+              <hr /> 
+              
+              <?php while($post = $posts->fetch(PDO::FETCH_ASSOC)):?>
+               
+                <div class="user-post">
+                    <!-- naam poster -->
+                    <a href="#">Wobin Rillekens</a> <br/>
+                    <!-- afbeelding -->
+                    <img src="data:image/jpeg;base64,<?php echo base64_encode($post['picture']); ?>" alt="" /> <br/>
+                    <!-- naam poster + beschrijving -->
+                    <span><a href="#"></a><?php echo $post['description']; ?></span> <br/>
+                    <!-- aantal likes -->
+                    <span>2 likes</span> <br/>
+                    <!-- reactie + naam van persoon die reageert -->
+                    <span><a href=""></a></span> <br/>
+                    <!-- Like button -->
+                    <button>&hearts;</button>
+                    <!-- reactieveld -->
+                    <input type="text" placeholder="Add a reacton" />
+                    <!-- tijd post -->
+                    <span> 2u </span>
+                </div>
                 
-            </div>
-        </form>
+                <br />
+                <hr />
+                <?php endwhile; ?>
+
+        </div>
 
     </div>
 
-</div>
-    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

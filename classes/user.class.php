@@ -24,7 +24,7 @@ class User
 	{
 		try
 		{
-			$new_password = password_hash($password, PASSWORD_DEFAULT);
+			$password = password_hash($password, PASSWORD_DEFAULT);
 			
 			$statement = $this->conn->prepare("INSERT INTO db_users(username, fullname, email, password) 
 		                                               VALUES(:username, :fullname, :email, :password)");
@@ -32,7 +32,7 @@ class User
 			$statement->bindparam(":username", $username);
             $statement->bindparam(":fullname", $fullname);
 			$statement->bindparam(":email", $email);
-			$statement->bindparam(":password", $new_password);										  
+			$statement->bindparam(":password", $password);										  
 				
 			$statement->execute();	
 			
@@ -111,9 +111,24 @@ class User
 		}		
     }
     
-    public function updatePassword()
+    public function updatePass($newpassword)
     {
-        
+        try
+		{	
+            $newpassword = password_hash($newpassword, PASSWORD_DEFAULT);
+            
+            $userRow = $_SESSION['session'];
+            $statement = $this->conn->prepare("UPDATE db_users SET password=:password WHERE id=". $userRow .";");
+			$statement->bindparam(":password", $newpassword);									  
+				
+			$statement->execute();	
+			
+			return $statement;	
+		}
+		catch(PDOException $e)
+		{
+			echo $e->getMessage();
+		}	
     }
 }
 ?>

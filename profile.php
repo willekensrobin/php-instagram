@@ -52,7 +52,7 @@
           
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="home.php"><span class="glyphicon glyphicon-home"></span> Home</a> &nbsp;</li>
+            <li><a href="dashboard.php"><span class="glyphicon glyphicon-home"></span> Dashboard</a> &nbsp;</li>
             <li><input type="text" placeholder="Search"/></li>
             <li><a href="profile.php"><span class="glyphicon glyphicon-user"></span> Profile</a> &nbsp;</li>
             <li><a href="post.php"><span class="glyphicon glyphicon-camera"></span> Post</a> &nbsp;</li>
