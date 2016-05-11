@@ -82,3 +82,4 @@ if(!empty($_POST))
     
 </div>
 
+<?php require_once("templates/footer.php") ?>

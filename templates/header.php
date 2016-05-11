@@ -41,7 +41,7 @@ else{
 
 
         <body>
-            <nav class="navbar navbar-default">
+            <nav class="navbar navbar-inverse">
                 <div class="container-fluid">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
@@ -51,7 +51,7 @@ else{
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="#">Brand</a>
+                        <a class="navbar-brand" href="home.php"><p>IMDSTAGRAM</p></a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <form class="navbar-form navbar-left" role="search">
@@ -68,13 +68,22 @@ else{
                             <a href=""><i class="fa fa-bell" aria-hidden="true"></i>
 </a>
                         </li>
+                        <li>
+                            <a href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i>
+</a>
+                        </li>
+                        <li>
+                            <a href="post.php"><i class="fa fa-upload" aria-hidden="true"></i>
+</a>
+                        </li>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                                <?php if(isset($_SESSION['loggedin_userid'])){ ?>
                                 <span class="glyphicon glyphicon-user"></span>&nbsp;Hello
                                 <?php echo $userRow['fullname']; ?>&nbsp;<span class="caret"></span></a> 
                                 <ul class="dropdown-menu">
-                                <li><a href="account.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Account</a></li>
+                                  <li><a href="profile.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Profile</a></li>
+                                <li><a href="account.php"><span class="glyphicon glyphicon-cog"></span>&nbsp;Edit Account</a></li>
                                 <li><a href="logout.php?logout=true"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
                           
                                <?php }else{?>
