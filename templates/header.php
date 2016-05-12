@@ -4,19 +4,8 @@
 	
 	require_once("classes/user.class.php");
 
-	$auth_user = new User();
-	
-	if(isset($_SESSION['loggedin_userid'])){
-	$user_id = $_SESSION['loggedin_userid'];
-	
-	$statement = $auth_user->runQuery("SELECT * FROM db_users WHERE id=:id");
-	$statement->execute(array(":id"=>$user_id));
-	
-	$userRow=$statement->fetch(PDO::FETCH_ASSOC);
-    }
-else{
-    $userRow = [];
-}
+    require_once("classes/checkLogin.class.php");
+
 
 ?>
     <!DOCTYPE html>
@@ -55,7 +44,7 @@ else{
                         <a class="navbar-brand" href="home.php"><p>IMDSTAGRAM</p></a>
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <form class="navbar-form navbar-left" role="search">
+                    <form class="navbar-form navbar-left" role="search" id="searchform" action="search.php">
                         <div class="form-group">
                             <input type="text" class="form-control" placeholder="Search">
                         </div>
