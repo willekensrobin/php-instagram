@@ -1,7 +1,7 @@
 <?php
-session_start();
-
 require_once('classes/user.class.php');
+
+include("templates/header.php");
 
 $user = new User();
 
@@ -72,32 +72,18 @@ if(!empty($_POST))
 }
 
 ?>
-<!DOCTYPE html>
-<html lang="">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <title>Signup</title>
-    <link rel="shortcut icon" href="">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-    <style>body{padding-top:50px;}.starter-template{padding:40px 15px;text-align:center;}</style>
 
-    <!--[if IE]>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-</head>
+ 
 
-<body>
 
-<div class="signin-form">
+
+
+
+<div class="form-sign">
 
 <div class="container">
     	
-        <form method="post" class="form-signin">
+        <form method="post" class="form-signup">
             <h2 class="form-signin-heading">Sign up</h2><hr />
             <?php
 			if(isset($error))
@@ -121,7 +107,7 @@ if(!empty($_POST))
 			}
 			?>
             <div class="form-group">
-            <input type="text" class="form-control" name="username" placeholder="Username" value="<?php if(isset($error)){echo $username;}?>" />
+            <input type="text" class="form-control" id="username" onBlur="checkUserName(this.value)" name="username" placeholder="Username" value="<?php if(isset($error)){echo $username;}?>" /><span id="user-availability-status"></span>    
             </div>
             <div class="form-group">
             <input type="text" class="form-control" name="fullname" placeholder="Fullname" value="<?php if(isset($error)){echo $fullname;}?>" />
@@ -150,7 +136,3 @@ if(!empty($_POST))
        </div>
 </div>
 
-</div>
-
-</body>
-</html>

@@ -1,7 +1,5 @@
 <?php
 	require_once('classes/user.class.php');
-
-
 	session_start();
     $session = new User();
 
@@ -17,3 +15,5 @@ if($session->loggedin()!=""){
 else{
     header('home.php');
 };
+
+?>

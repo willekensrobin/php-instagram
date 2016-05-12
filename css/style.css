@@ -42,6 +42,15 @@
     
 }
 
+.form-signup{
+    width:500px;
+    margin: 0 auto;
+    background-color:rgba(235, 233, 233, 0.77);
+    padding: 40px;
+    border-radius: 10px;
+    
+}
+
 .form-post{
   width:500px;
     margin: 0 auto;
