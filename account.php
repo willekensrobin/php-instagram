@@ -3,8 +3,6 @@
 	require_once("classes/session.php");
 	
 	require_once("classes/user.class.php");
-    
-    include("templates/header.php");
 
 	$update_user = new User();
 	
@@ -51,7 +49,8 @@ if(!empty($_POST))
 }
 
 ?>
-
+<?php include("templates/header.php");?>
+   
     <div class="clearfix"></div>
     	
     

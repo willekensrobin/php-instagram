@@ -4,7 +4,7 @@ class Db
     private $host = "localhost";
     private $db_name = "instagram";
     private $username = "root";
-    private $password = "";
+    private $password = "root";
     public $conn;
      
     public function dbConnection()

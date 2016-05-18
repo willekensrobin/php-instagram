@@ -1,8 +1,7 @@
 <?php
-include("templates/header.php");
 
 require_once("classes/user.class.php");
-
+include("templates/header.php");
 $login = new User();
 
 if($login->loggedin()!="")

@@ -4,51 +4,39 @@ require_once("classes/session.php");
 
 require_once("classes/post.class.php");
 
-include("templates/header.php");
-
 $post = new Post();
 
 if(!empty($_POST))
 {
-    $picture = $_POST['picture'];
-    $comment = strip_tags($_POST['comment']);
-    
-    if($picture=="")	
+    if(getimagesize($_FILES['picture']['tmp_name']) == FALSE)
     {
-		$error[] = "No picture";	
-	}
-    else if($comment=="")	
-    {
-		$error[] = "Add a description";	
-	}
+        echo "Please select an image.";
+    }
     else
     {
-        try
-		{
-            if($post->savePost($picture, $comment))
-            {	
-				$post->redirect('dashboard.php?joined');
-            }
-			
-		}
-		catch(PDOException $e)
-		{
-			echo $e->getMessage();
-		}
+        $image= addslashes($_FILES['picture']['tmp_name']);
+        $name= addslashes($_FILES['picture']['name']);
+        $image= file_get_contents($image);
+        $image= base64_encode($image);
+        $description = $_POST['description'];
+        
+        if($post->savePost($image, $name, $description))      
+        {
+            $post->redirect('dashboard.php?joined');
+        }
+        
     }
 }
-
-
-    
 ?>
-
+<?php include("templates/header.php"); ?>
+   
     <div class="clearfix"></div>
     	  
     <div class="container-fluid" style="margin-top:80px;">
 	
     <div class="container">
         
-        <form method="post" class="form-post">
+        <form method="post" enctype="multipart/form-data" class="form-post">
             <h2 class="form-signin-heading">Post picture</h2> <hr />
             <?php
 			if(isset($error))
@@ -70,12 +58,12 @@ if(!empty($_POST))
                  </div>
                  <?php
 			}
-			?>
+			?>  
             <div class="form-group">
                 <input type="file" class="form-control" name="picture" id="picture">
             </div>
             <div class="form-group">
-            <input type="text" class="form-control" name="comment" placeholder="Write description" id="comment" />
+            <input type="text" class="form-control" name="description" placeholder="Write description" id="description" />
             </div>
             
             <div class="clearfix"></div><hr />

@@ -6,7 +6,6 @@
 
     require_once("classes/checkLogin.class.php");
 
-
 ?>
     <!DOCTYPE html>
     <html lang="">
@@ -16,9 +15,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        <title>Instagram -
-            <?php echo $userRow['fullname']; ?>
-        </title>
+        <title>Instagram</title>
         <link rel="shortcut icon" href="">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">

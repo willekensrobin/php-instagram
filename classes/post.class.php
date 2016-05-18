@@ -14,14 +14,15 @@ class Post
 		$this->conn = $db;
     }
     
-    public function savePost($picture, $comment)
+    public function savePost($image, $name, $description)
 	{
 		try
 		{
-			$statement = $this->conn->prepare("INSERT INTO db_picture(picture, description) 
-		                                               VALUES(:picture, :comment)");								  
-			$statement->bindparam(":picture", $picture);
-            $statement->bindparam(":comment", $comment);										  
+			$statement = $this->conn->prepare("INSERT INTO db_picture(picture, name, description) 
+		                                               VALUES(:image, :name, :description)");								  
+			$statement->bindparam(":image", $image);
+            $statement->bindparam(":name", $name);	
+            $statement->bindparam(":description", $description);	
 				
 			$statement->execute();	
 			
@@ -30,12 +31,12 @@ class Post
 		catch(PDOException $e)
 		{
 			echo $e->getMessage();
-		}				
+		}	  
 	}
     
     public function getPosts () 
     {
-        $result = $this->conn->query("SELECT * FROM db_picture");
+        $result = $this->conn->query("SELECT * FROM db_picture ORDER BY id DESC");
         return $result;
     }
     

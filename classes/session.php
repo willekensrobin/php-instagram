@@ -5,7 +5,7 @@
 
 if($session->loggedin()!=""){
 
-	$conn = new mysqli("localhost", "root", "", "instagram");
+	$conn = new mysqli("localhost", "root", "root", "instagram");
 	$query = "SELECT * FROM db_users WHERE username = '".$_SESSION['loggedin_user']."';";
 	$result = $conn->query($query);
 	

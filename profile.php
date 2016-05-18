@@ -4,7 +4,6 @@
 	
 	require_once("classes/user.class.php");
     
-    include("templates/header.php");
 	$auth_user = new User();
 	
 	
@@ -16,7 +15,7 @@
 	$userRow=$statement->fetch(PDO::FETCH_ASSOC);
 	
 ?>
-
+<?php include("templates/header.php"); ?>
 
 	<div class="clearfix"></div>
 	

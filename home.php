@@ -1,6 +1,5 @@
-<?php    
-    require_once("templates/header.php");
-?>
+<?php require_once("templates/header.php");?>
+
 <div class="banner-img">
 <div class="container-fluid">
   <h1>Welcome to IMDstagram</h1>
@@ -10,9 +9,4 @@
    </div>
 </div>
 
-
-
-
-<?php
- require_once("templates/footer.php")
-     ?>    
+<?php require_once("templates/footer.php")?>    

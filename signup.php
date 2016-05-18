@@ -1,8 +1,6 @@
 <?php
 require_once('classes/user.class.php');
 
-include("templates/header.php");
-
 $user = new User();
 
 if($user->loggedin()!="")
@@ -72,12 +70,7 @@ if(!empty($_POST))
 }
 
 ?>
-
- 
-
-
-
-
+<?php include("templates/header.php");?>
 
 <div class="form-sign">
 

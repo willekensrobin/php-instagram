@@ -3,12 +3,9 @@
 	require_once("classes/session.php");
 	
 	require_once("classes/user.class.php");
-require_once("templates/header.php");
-
 
 	$update_pass = new User();
-	
-	
+		
 	$user_id = $_SESSION['session'];
 	
 	$statement = $update_pass->runQuery("SELECT * FROM db_users WHERE id=:id");
@@ -63,8 +60,7 @@ if(!empty($_POST))
 }
 
 ?>
-
-    
+<?php  require_once("templates/header.php"); ?>
 
     <div class="clearfix"></div>
 
