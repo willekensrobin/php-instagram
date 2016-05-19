@@ -2,12 +2,31 @@
 
 require_once("classes/session.php");
 include("templates/header.php");
-
 require_once("classes/post.class.php");
+include_once("classes/comment.class.php");
 
 $p = new Post();
 
 $posts = $p->getPosts();
+
+$activity = new Comment();
+
+$recentActivities = $activity->GetRecentActivities();
+
+	
+	//controleer of er een update wordt verzonden
+	if(!empty($_POST['activitymessage']))
+	{
+		$comment = $_POST['activitymessage'];
+		try 
+		{
+			$activity->Save();
+		} 
+		catch (Exception $e) 
+		{
+			$feedback = $e->getMessage();
+		}
+	}
 
 ?>
 <!DOCTYPE html>
@@ -27,10 +46,44 @@ $posts = $p->getPosts();
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-     
+    <script>
+        $(document).ready(function()
+        {
+            $("#btnSubmit").on("click", function(e){
+                //tekstvak uitlezen 
+                var message = $("#activitymessage").val();
+
+                //post naar comment.php pagina om op te slaan 
+                $.post( "ajax/comment.php", { message:message  }).done(function( respons ) {
+
+                    //boodschap bijvoegen in UI 
+                    if(respons.status == "succes")
+                    {
+                        var li = "<li style='display:none;'><h1>Follower</h1>" + respons.message + "/<li>";
+                        $("ul#listupdates").prepend(li);
+                        $("ul#listupdates li:first-child").slideDown("fast");
+
+                        //laatste weghalen
+                        $("ul#listupdates li").last().slideUp("fast", function(){
+                        $(this).remove();
+                        });
+                    }
+
+                });
+
+                e.preventDefault();
+            });
+
+        });
+    </script> 
+
+    <script type="text/javascript">
+
+
+    </script>
 </head>
 
-   <body>
+<body>
    
     <div class="clearfix"></div>
     	 
@@ -80,11 +133,27 @@ $posts = $p->getPosts();
                     <!-- Like button -->
                     <button>&hearts;</button>
                     <!-- reactieveld -->
-                    <input type="text" name="comment" id="comment" placeholder="Add reaction" />
-                    <button type="submit" id="btnSubmit">Comment</button>
+                    <input type="text" name="activitymessage" id="activitymessage" placeholder="Add reaction" />
+                    <input type="submit" value="Comment" id="btnSubmit">
                     <!-- tijd post -->
                     <span> 1min </span>
-                    
+                    <div class="statusupdates">
+                    <ul id="listupdates">
+                    <?php 
+                        if(count($recentActivities) > 0)
+                        {		
+                            foreach($recentActivities as $key=>$singleActivity)
+                            {
+                                echo "<li><h4>Follower</h4> ". $singleActivity['comment'] ."</li>";
+                            }
+                        }
+                        else
+                        {
+                            echo "<li>Waiting for first status update</li>";	
+                        }
+                    ?>
+                    </ul>
+                    </div>
                 </div>
                 
                 <br />
